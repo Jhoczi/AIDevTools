@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  mongodb:
+    container_name: pb.meetup.ai
+    image: mongo
+    ports:
+      - "27017:27017"
