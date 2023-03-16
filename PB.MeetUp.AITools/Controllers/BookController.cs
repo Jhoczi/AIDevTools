@@ -33,7 +33,7 @@ public class BookController : Controller
     [HttpGet("GetBook/{id}")]
     public async Task<IActionResult> GetBook(string id)
     {
-        var book = await _bookProvider.Find(record => record.Id == id);
+        var book = await _bookProvider.FindSingle(record => record.Id == id);
         if (book == null)
         {
             return NotFound();
@@ -42,6 +42,16 @@ public class BookController : Controller
         return Ok(book);
     }
 
+    // create async get endpoint "GetBooksByAuthor" to get books by author book property
+    [HttpGet("GetBooksByAuthor")]
+    public async Task<IActionResult> GetBooksByAuthor(string author)
+    {
+        var books = await _bookProvider.FindMany(record => record.Author == author);
+        if (books == null)
+            return NotFound();
+        
+        return Ok(books);
+    }
 
     // create method to create new book
     [HttpPost("CreateBook")]

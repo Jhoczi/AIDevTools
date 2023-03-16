@@ -36,9 +36,13 @@ public class MongoProvider<TModel> : IMongoProvider<TModel, string> where TModel
         return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
     }
 
-    public Task<TModel> Find(Expression<Func<TModel, bool>> predicate)
+    public async Task<TModel> FindSingle(Expression<Func<TModel, bool>> predicate)
     {
-        return _collection.Find(predicate).FirstOrDefaultAsync();
+        return await _collection.Find(predicate).FirstOrDefaultAsync();
+    }
+    public async Task<ICollection<TModel>> FindMany(Expression<Func<TModel, bool>> predicate)
+    {
+        return await _collection.Find(predicate).ToListAsync();
     }
 
     public async Task<IEnumerable<TModel>> GetAll()

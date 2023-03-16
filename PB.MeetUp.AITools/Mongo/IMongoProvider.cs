@@ -13,7 +13,8 @@ public interface IMongoProvider<TEntity, TId> where TEntity : IEntity<TId>
     
     Task<TEntity> Get(TId id);
 
-    Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+    Task<TEntity> FindSingle(Expression<Func<TEntity, bool>> predicate);
+    Task<ICollection<TEntity>> FindMany(Expression<Func<TEntity, bool>> predicate);
     
     Task<IEnumerable<TEntity>> GetAll();
     

@@ -9,5 +9,7 @@ public class Book : IEntity<string>
     [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
     public string? Id { get; set; }
     public string Name { get; set; }
+    
+    public string Author { get; set; }
     public string Description { get; set; }
 }
